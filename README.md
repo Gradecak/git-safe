@@ -23,14 +23,14 @@ repo.
 
 
 ### Installation
-To get git-safe up and running, simply clone the repo and run the setup.sh script. 
+To get Git-safe up and running, simply clone the repo and run the setup.sh script. 
 ```bash
 git clone https://github.com/Gradecak/git-safe.git
 ```
-once cloned make the script executable by running `chmod +x setup.sh` followed by `./setup.sh` This will begin the
+Once cloned, make the script executable by running `chmod +x setup.sh` followed by `./setup.sh` This will begin the
 configuration process and prompt you for any input it requires.
 
-once you run setup.sh if you wish to track any aditional repositories using git-safe simply add the absolute path to ~/.git_safe/repos
+once you run setup.sh if you wish for Git-safe to track any aditional repositories simply add the absolute path to `~/.git_safe/repos`
 
 
 ### Issues
