@@ -34,6 +34,5 @@ once you run setup.sh if you wish for Git-safe to track any aditional repositori
 
 
 ### Issues
-1. There is currently an issue with macOS when trying to push to a remote repo over https as cron cannot get access to the the
-git configuration. For now a workaround is to change the remote url so that git push will do so ussing SSH instead.
+1. There is currently an issue ~~with macOS~~ when trying to push to a remote repo over https as cron cannot get access to the the git configuration. For now a workaround is to change the remote url so that git push will do so ussing SSH instead.
 2. Right now there is no user friendly way to change the cron job time once it has been set by the setup script. If you are familiar with crontab you can manually edit the file to change the time that the script will execute.
