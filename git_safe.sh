@@ -30,7 +30,7 @@ function is_valid_repo {
 }
 # get the status of the repo passed as a paramater 
 # $1     : full path to the git directory
-# return : status of the repository
+# return : status of the repository adding another comment for the craic
 function test_and_push {
     echo "Testing $1"
     if [ $(is_valid_repo $1) = "true" ]; then
