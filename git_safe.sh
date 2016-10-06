@@ -28,9 +28,8 @@ function is_valid_repo {
         echo "false"
     fi
 }
-# get the status of the repo passed as a paramater 
-# $1     : full path to the git directory
-# return : status of the repository adding another comment for the craic
+# get the status of the repo passed as a paramater $1 : full path to the git
+# directory return : status of the repository adding another comment casdf
 function test_and_push {
     echo "Testing $1"
     if [ $(is_valid_repo $1) = "true" ]; then
