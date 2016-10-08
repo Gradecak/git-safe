@@ -25,9 +25,9 @@ function check_ssh_authentication {
     response="$(ssh -oStrictHostKeyChecking=no -T git@github.com 2>&1)"
     echo "$response"
     if [[ $(grep -o "authenticated" <<<  "$response") = "authenticated" ]] ; then
-        echo "true"
+        printf "true"
     else
-        echo "SSH keys not properly configured see this guide for instructions \n
+        printf "SSH keys not properly configured see this guide for instructions \n
 https://help.github.com/articles/generating-an-ssh-key/\n"
         exit 0
     fi
@@ -38,12 +38,13 @@ https://help.github.com/articles/generating-an-ssh-key/\n"
 # return : true/false
 function check_origin {
     cd $1
-    origin=$"(git remote -v | grep 'git')"
-    if [[ $origin != 'git' ]]; then
-        printf "please set the remote origin to use ssh and try again\nsee:https://help.github.com/articles/changing-a-remote-s-url/ \n"
+    origin="$(git remote -v | grep -o -m 1 'git@github.com')"
+    if [[ $origin != 'git@github.com' ]]; then
+        printf "please set the remote origin to use ssh and try again\nsee: https://help.github.com/articles/changing-a-remote-s-url/ \n"
     else
         echo 'true'
-    }
+    fi
+}
 # add a repo to be tracked in the config file
 # $1 : full path to the repo
 function add_repo {
