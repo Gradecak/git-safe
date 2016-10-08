@@ -20,12 +20,37 @@ function is_repo {
         echo "false"
     fi
 }
-#add a repo to be tracked in the config file
+# check if ssh authentication is setup
+function check_ssh_authentication {
+    response="$(ssh -oStrictHostKeyChecking=no -T git@github.com 2>&1)"
+    echo "$response"
+    if [[ $(grep -o "authenticated" <<<  "$response") = "authenticated" ]] ; then
+        echo "true"
+    else
+        echo "SSH keys not properly configured see this guide for instructions \n
+https://help.github.com/articles/generating-an-ssh-key/\n"
+        exit 0
+    fi
+}
+# check if the remote for the repo is set up to use ssh for pushing
+# params:
+# $1 : a full path to the repository
+# return : true/false
+function check_origin {
+    cd $1
+    origin=$"(git remote -v | grep 'git')"
+    if [[ $origin != 'git' ]]; then
+        printf "please set the remote origin to use ssh and try again\nsee:https://help.github.com/articles/changing-a-remote-s-url/ \n"
+    else
+        echo 'true'
+    }
+# add a repo to be tracked in the config file
 # $1 : full path to the repo
 function add_repo {
     if [ -d $1 ]; then                      # if the path is a directory
         if [ $(is_repo $1) = "true" ]; then # if the path is a git repo
             echo $1 >> $REPO_LIST
+            create_hook $1                  # create a post commit hook on the repo
         else
             echo "path given is not a git repository"
         fi
@@ -43,7 +68,18 @@ function create_cronjob {
     crontab mycron
     rm mycron
 }
-#configures the git_safe service and generates the appropriate config files
+#create a hook so that the repository will be pushed every time a commit is made
+# $1 path to the repo that we want to be auto commited
+function create_hook {
+    if [ -e "$1/.git/hooks/post-commit" ]; then
+        echo 'git push' >> "$1/.git/hooks/post-commit"
+    else
+        echo $'#!/bin/bash \n git push' > "$1/.git/hooks/post-commit"
+        cd "$1/.git/hooks/"
+        chmod +x "$1/.git/hooks/post-commit"
+    fi
+}
+#configures the git_safe service and generates the config files
 #Used on first run
 function init_git_safe {
     mkdir "$HOME/.git_safe"
@@ -77,4 +113,5 @@ function main {
     create_cronjob
 }
 
-main
+#main
+check_origin $1

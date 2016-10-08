@@ -38,10 +38,6 @@ function test_and_push {
             echo "commiting and pushing changes"
             git add .
             git commit -m 'auto commit'
-            git push
-        elif [ "$(git push -n 2>&1)" != "Everything up-to-date" ]; then #if there are unpushed changes
-            echo "pushing changes"
-            git push
         fi
     fi
 }
