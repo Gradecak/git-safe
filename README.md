@@ -24,6 +24,7 @@ repo.
 
 ### Installation
 In order to get Git-sync up and running, you must first setup a couple of pre requisites:
+
 1. Ensure that ssh authentication for github is configured on your machine.[See guide here](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
 2. Ensure that the local repository is configured to push using ssh [See guide here](https://help.github.com/articles/changing-a-remote-s-url/)
 
