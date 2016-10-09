@@ -23,16 +23,20 @@ repo.
 
 
 ### Installation
-To get Git-sync up and running, simply clone the repo and run the setup.sh script. 
+In order to get Git-sync up and running, you must first setup a couple of pre requisites:
+1. Ensure that ssh authentication for github is configured on your machine.[See guide here](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/)
+2. Ensure that the local repository is configured to push using ssh [See guide here](https://help.github.com/articles/changing-a-remote-s-url/)
+
+After that is complete simply clone the repo and run the setup.sh script.
 ```bash
 git clone https://github.com/Gradecak/git-sync.git
 ```
 Once cloned, make the script executable by running `chmod +x setup.sh` followed by `./setup.sh` This will begin the
 configuration process and prompt you for any input it requires.
 
-once you run setup.sh if you wish for Git-safe to track any aditional repositories simply add the absolute path to `~/.git_sync/repos`. You will also have to ensure that a post-commit hook is setup for the newly entered repo by running the
+once you run setup.sh if you wish for Git-sync to track any aditional repositories simply add the absolute path to `~/.git_sync/repos`. You will also have to ensure that a post-commit hook is setup for the newly entered repo by running the
 following command. `echo "#!/bin/bash \n git push" >> <path_to_repo>/.git/hooks/post-commit && chmod +x <path_to_repo>/.git/hooks/post-commit`.
 
 
 ### Issues
-1. Right now there is no user friendly way to change the cron job time once it has been set by the setup script. If you are familiar with crontab you can manually edit the file to change the time that the script will execute.
+1. Right now there is no user friendly way to change the cron job time or add new repos once they habe been set by the setup script. If you are familiar with crontab you can manually edit the file to change the time that the script will execute. If you wish to add more repositories 
