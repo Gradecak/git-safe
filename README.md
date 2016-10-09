@@ -10,7 +10,7 @@ It accomplishes this by setting up a cron job to run the script at a time specif
 The intended use of Git-sync is to make sure that all of your personal projects are always backed up in case of data loss.
 
 
-**Git-safe is especially usefull for ensuring that your dotfiles are always backed up.**
+**Git-sync is especially usefull for ensuring that your dotfiles are always backed up.**
 
 
 However, while Git-sync might seem convenient, it is best to not track any group projects or repos where commited code must be kept
