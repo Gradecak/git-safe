@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #constants
-CONFIG_PATH="$HOME/.git_safe"
+CONFIG_PATH="$HOME/.git_sync"
 REPO_LIST="$CONFIG_PATH/repos"
 CONFIG_FILE="$CONFIG_PATH/config"
 #runtime variables
@@ -31,11 +31,9 @@ function is_valid_repo {
 # get the status of the repo passed as a paramater $1 : full path to the git
 # directory return : status of the repository adding another comment casdf
 function test_and_push {
-    echo "Testing $1"
     if [ $(is_valid_repo $1) = "true" ]; then
         cd $1
         if [ ! -z "$(git status --porcelain)" ]; then #if there are uncommited changes
-            echo "commiting and pushing changes"
             git add .
             git commit -m 'auto commit'
         fi
